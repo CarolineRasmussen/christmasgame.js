@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Game</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- CreateJS CDN -->
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== OVERLAY: START + INSTRUKTIONER ===== -->
+  <div id="menuOverlay" class="overlay show">
+    <div class="menu-box">
+      <h1>🎄 Christmas Game 🎄</h1>
+      <button id="btnStart" class="btn btn-green">Start Game</button>
+      <button id="btnInstructions" class="btn btn-outline">Instruktioner</button>
+    </div>
+  </div>
+
+  <!-- ===== OVERLAY: INSTRUKTIONER ===== -->
+  <div id="instructionsOverlay" class="overlay hide">
+    <div class="menu-box">
+      <h2>Instruktioner</h2>
+      <img src="instruction.png" class="instr-img" alt="Instruktioner">
+      <button id="btnBack" class="btn btn-green">Tilbage</button>
+    </div>
+  </div>
+
+  <!-- ===== OVERLAY: GAME OVER ===== -->
+  <div id="gameOverOverlay" class="overlay hide">
+    <div class="menu-box">
+      <h2>Game Over</h2>
+      <p id="finalScoreTxt"></p>
+      <button id="btnTryAgain" class="btn btn-green">Prøv igen</button>
+    </div>
+  </div>
+
+  <!-- ===== SPILLET ===== -->
+<div class="game-container">
+    <canvas id="canvas"></canvas>
+</div>
+
+
+  <script src="christmas.js"></script>
+</body>
+</html>

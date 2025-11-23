@@ -1,0 +1,140 @@
+/* ================= GAME CONTAINER ================= */
+/* Hele body får firma-logo mønster */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('firma-background.png');
+    background-repeat: repeat;       /* gentag logo */
+    background-size: 100px 100px;    /* størrelse på hvert logo, tilpas som ønsket */
+    display: flex;
+    justify-content: center;         /* centrer canvas horisontalt */
+    align-items: center;             /* centrer canvas vertikalt */
+    height: 100vh;                   /* fyld hele vinduet */
+}
+
+/* Canvas container */
+.game-container {
+    position: relative;
+    width: 80%;                       /* responsivt */
+    max-width: 1000px;                /* maks størrelse */
+}
+
+/* Canvas fylder container */
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: #000;           /* fallback, hvis baggrund ikke loader */
+    margin: 20px auto; /* lidt afstand til toppen */
+    border-radius: 15px; /* afrundede hjørner */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* skygge-effekt */
+
+}
+
+
+
+/* ================= OVERLAYS ================= */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.3s;
+}
+
+.overlay.hide {
+    display: none;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.menu-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.menu-box h1, .menu-box h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+}
+
+.instr-img {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.btn-green {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-green:hover {
+    background-color: #218838;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #28a745;
+    color: #28a745;
+}
+
+.btn-outline:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* ================= GAME OVER ================= */
+#gameOverOverlay .menu-box {
+    background-color: #fff3f3;
+    border: 2px solid #ff4d4d;
+}
+
+#gameOverOverlay h2 {
+    color: #ff1a1a;
+}
+
+#finalScoreTxt {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 800px){
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .menu-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .instr-img {
+        width: 150px;
+    }
+}
