@@ -12,7 +12,9 @@ var controls = {
     left:false,
     right:false,
     up:false,
-    down:false
+    down:false,
+    var touchStartX = 0;,
+    var touchStartY = 0;
 };
 
 var healthText;
@@ -471,6 +473,35 @@ function fingerDown(evt) {
     if(evt.keyCode===40) controls.down=true;
 }
 
+// ----------------- TOUCH CONTROLS -----------------
+function touchStart(evt) {
+    evt.preventDefault(); // forhindrer scroll på mobil
+    const touch = evt.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+
+    if (touchStartX < window.innerWidth / 2) controls.left = true;
+    else controls.right = true;
+}
+
+function touchMove(evt) {
+    evt.preventDefault();
+    const touch = evt.touches[0];
+    const deltaY = touch.clientY - touchStartY;
+
+    controls.up = deltaY < -10;   // Swipe op
+    controls.down = deltaY > 10;  // Swipe ned
+}
+
+function touchEnd(evt) {
+    evt.preventDefault();
+    controls.left = false;
+    controls.right = false;
+    controls.up = false;
+    controls.down = false;
+}
+
+
 // ----------------- HJÆLPEFUNKTIONER -----------------
 function resizeCanvas() {
     var canvas = document.getElementById('canvas');
@@ -497,6 +528,11 @@ window.addEventListener('keyup', fingerLifted);
 window.addEventListener('keydown', fingerDown);
 window.addEventListener('resize', resizeCanvas);
 
+const canvas = document.getElementById('canvas');
+canvas.addEventListener('touchstart', touchStart);
+canvas.addEventListener('touchmove', touchMove);
+canvas.addEventListener('touchend', touchEnd);
+canvas.addEventListener('touchcancel', touchEnd);
 
 // ----------------- HTML BUTTON HANDLERS -----------------
 window.addEventListener('load', () => {
