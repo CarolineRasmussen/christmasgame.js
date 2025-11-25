@@ -48,16 +48,6 @@ var aebleskriver = [];
 function preload() {
     stage = new createjs.Stage("canvas");
 
-    // Baggrund inde i spillet
-bg = new createjs.Bitmap("background.png");
-
-// Vent til billedet er loadet, før vi skalerer
-bg.image.onload = function() {
-    resizeBackground(); // kalder hjælpefunktion til at skalere baggrund
-};
-
-stage.addChildAt(bg, 0); // baggrunden skal være bag alt andet
-
     preloadText = new createjs.Text('Loading...', '60px Verdana', '#000');
     preloadText.textAlign = "center";
     preloadText.textBaseline = "middle";
@@ -67,7 +57,9 @@ stage.addChildAt(bg, 0); // baggrunden skal være bag alt andet
 
     queue = new createjs.LoadQueue(true);
     queue.installPlugin(createjs.Sound);
+
     queue.loadManifest([
+        { id:"bg", src:"background.png" },
         { id:"backgroundmusic", src:"audio/backgroundmusic.mp3" },
         { id:"lifesound", src:"audio/getlife.mp3" },
         { id:"pointssound", src:"audio/points.mp3" },
@@ -77,22 +69,33 @@ stage.addChildAt(bg, 0); // baggrunden skal være bag alt andet
         { id:"speedup", src:"audio/speedup.mp3" },
         { id:"looselifesound", src:"audio/looselife.mp3" }
     ]);
-    queue.on('progress', function(e){ preloadText.text = Math.round(e.progress*100) + "%"; });
+
+    queue.on('progress', function(e) {
+        preloadText.text = Math.round(e.progress*100) + "%";
+    });
+
     queue.on('complete', init);
 }
 
-// ----------------- INIT -----------------
-function init() {
-    stage.removeChild(preloadText);
-    
-    var canvas = document.getElementById("canvas");
-    canvas.width = window.innerWidth * 0.8;   // canvas fylder 80% af skærmbredden
-    canvas.height = window.innerHeight * 0.8; // canvas fylder 80% af skærmhøjden
 
-    // Opret stage
-    stage = new createjs.Stage(canvas);
-    
-    createjs.Sound.play('backgroundmusic');
+// ----------------- INIT -----------------
+stage.removeChild(preloadText);
+
+var canvas = document.getElementById("canvas");
+canvas.width = window.innerWidth * 0.8;
+canvas.height = window.innerHeight * 0.8;
+
+// Opret stage igen
+stage = new createjs.Stage(canvas);
+
+// Hent baggrund fra queue
+bg = new createjs.Bitmap(queue.getResult("bg"));
+resizeBackground();
+stage.addChildAt(bg, 0);
+
+// Afspil baggrundsmusik først efter load
+createjs.Sound.play("backgroundmusic", {loop:-1});
+
     
 
     // ----------------- PLAYER -----------------
