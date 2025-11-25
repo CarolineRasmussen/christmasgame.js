@@ -79,24 +79,19 @@ function preload() {
 
 
 // ----------------- INIT -----------------
-stage.removeChild(preloadText);
+function init() {
+    stage.removeChild(preloadText);
 
-var canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth * 0.8;
-canvas.height = window.innerHeight * 0.8;
+    var canvas = document.getElementById("canvas");
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.8;
 
-// Opret stage igen
-stage = new createjs.Stage(canvas);
+    stage = new createjs.Stage(canvas);
 
-// Hent baggrund fra queue
-bg = new createjs.Bitmap(queue.getResult("bg"));
-resizeBackground();
-stage.addChildAt(bg, 0);
-
-// Afspil baggrundsmusik først efter load
-createjs.Sound.play("backgroundmusic", {loop:-1});
-
-    
+    // Hent baggrund fra queue
+    bg = new createjs.Bitmap(queue.getResult("bg"));
+    resizeBackground();
+    stage.addChildAt(bg, 0);
 
     // ----------------- PLAYER -----------------
     var santa = new createjs.Bitmap('santa.png');
@@ -133,6 +128,7 @@ createjs.Sound.play("backgroundmusic", {loop:-1});
     createjs.Ticker.setFPS(40);
     createjs.Ticker.addEventListener('tick', tock);
 }
+
 
 // ----------------- PLAY GAME -----------------
 function playGame() {
