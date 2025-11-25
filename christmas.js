@@ -482,7 +482,7 @@ function touchStart(evt) {
     controls.touchStartY = touch.clientY;
 
 
-    if (touchStartX < window.innerWidth / 2) controls.left = true;
+    if (controls.touchStartX < window.innerWidth / 2) controls.left = true;
     else controls.right = true;
 }
 
@@ -537,7 +537,7 @@ canvas.addEventListener('touchend', touchEnd);
 canvas.addEventListener('touchcancel', touchEnd);
 
 // ----------------- HTML BUTTON HANDLERS -----------------
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const btnStart = document.getElementById('btnStart');
     const btnInstructions = document.getElementById('btnInstructions');
     const btnBack = document.getElementById('btnBack');
