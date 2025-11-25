@@ -67,7 +67,9 @@ function preload() {
         { id:"levelup", src:"audio/levelup.mp3" },
         { id:"gameoversound", src:"audio/gameover.mp3" },
         { id:"speedup", src:"audio/speedup.mp3" },
-        { id:"looselifesound", src:"audio/looselife.mp3" }
+        { id:"looselifesound", src:"audio/looselife.mp3" },
+        { id:"santa", src:"santa.png" },
+        { id:"dyr", src:"dyr.png" }
     ]);
 
     queue.on('progress', function(e) {
@@ -94,11 +96,11 @@ function init() {
     stage.addChildAt(bg, 0);
 
     // ----------------- PLAYER -----------------
-    var santa = new createjs.Bitmap('santa.png');
+    var santa = new createjs.Bitmap(queue.getResult("santa")); // <-- hent fra queue
     santa.width = 40;
     santa.height = 37;
 
-    var dyr = new createjs.Bitmap('dyr.png');
+    var dyr = new createjs.Bitmap(queue.getResult("dyr"));     // <-- hent fra queue
     dyr.x = 40;
     dyr.y = -15;
     dyr.width = 44;
@@ -554,8 +556,6 @@ document.addEventListener('DOMContentLoaded', () => {
     menuOverlay.classList.remove('show');
     playGame();
 
-    // Afspil lyd som reaktion på brugerklik
-    createjs.Sound.play("backgroundmusic", {loop:-1});
     });
 
     btnInstructions.addEventListener('click', () => {
