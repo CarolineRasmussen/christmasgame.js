@@ -9,13 +9,14 @@ var queue;
 var preloadText;
 var player;
 var controls = {
-    left:false,
-    right:false,
-    up:false,
-    down:false,
-    var touchStartX = 0;,
-    var touchStartY = 0;
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+    touchStartX: 0,
+    touchStartY: 0
 };
+
 
 var healthText;
 var healthPowerUp;
@@ -477,8 +478,9 @@ function fingerDown(evt) {
 function touchStart(evt) {
     evt.preventDefault(); // forhindrer scroll på mobil
     const touch = evt.touches[0];
-    touchStartX = touch.clientX;
-    touchStartY = touch.clientY;
+    controls.touchStartX = touch.clientX;
+    controls.touchStartY = touch.clientY;
+
 
     if (touchStartX < window.innerWidth / 2) controls.left = true;
     else controls.right = true;
@@ -487,7 +489,7 @@ function touchStart(evt) {
 function touchMove(evt) {
     evt.preventDefault();
     const touch = evt.touches[0];
-    const deltaY = touch.clientY - touchStartY;
+    const deltaY = touch.clientY - controls.touchStartY;
 
     controls.up = deltaY < -10;   // Swipe op
     controls.down = deltaY > 10;  // Swipe ned
