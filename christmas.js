@@ -487,6 +487,7 @@ function touchStart(evt) {
 
     if (controls.touchStartX < window.innerWidth / 2) controls.left = true;
     else controls.right = true;
+
 }
 
 function touchMove(evt) {
@@ -510,8 +511,9 @@ function touchEnd(evt) {
 // ----------------- HJÆLPEFUNKTIONER -----------------
 function resizeCanvas() {
     var canvas = document.getElementById('canvas');
-    canvas.width = window.innerWidth * 0.8;
-    canvas.height = window.innerHeight * 0.8;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
 
     // Center canvas i browseren via CSS
     canvas.style.display = "block";
@@ -552,9 +554,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalScoreTxt = document.getElementById('finalScoreTxt');
 
     btnStart.addEventListener('click', () => {
-        menuOverlay.classList.add('hide');
-        menuOverlay.classList.remove('show');
-        playGame();
+    menuOverlay.classList.add('hide');
+    menuOverlay.classList.remove('show');
+    playGame();
+
+    // Afspil lyd som reaktion på brugerklik
+    createjs.Sound.play("backgroundmusic", {loop:-1});
     });
 
     btnInstructions.addEventListener('click', () => {
