@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuOverlay.classList.add('hide');
     menuOverlay.classList.remove('show');
 
-    const instructionsContent = document.getElementById('instructionsContent'); // ny div i overlay
+    const instructionsContent = document.getElementById('instructionsContent');
     instructionsContent.innerHTML = `
         <p><strong>Spil Instruktioner:</strong></p>
         <ul style="list-style:none; padding:0;">
@@ -579,6 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
     instructionsOverlay.classList.add('show');
     instructionsOverlay.classList.remove('hide');
 });
+
 
     });
 
