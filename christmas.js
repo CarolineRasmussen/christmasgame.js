@@ -559,10 +559,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnInstructions.addEventListener('click', () => {
-        menuOverlay.classList.add('hide');
-        menuOverlay.classList.remove('show');
-        instructionsOverlay.classList.add('show');
-        instructionsOverlay.classList.remove('hide');
+    menuOverlay.classList.add('hide');
+    menuOverlay.classList.remove('show');
+
+    const instructionsContent = document.getElementById('instructionsContent'); // ny div i overlay
+    instructionsContent.innerHTML = `
+        <p><strong>Spil Instruktioner:</strong></p>
+        <ul style="list-style:none; padding:0;">
+            <li><img src="Present.png" width="30" style="vertical-align:middle;"> JS logo +1 point</li>
+            <li><img src="christmasballs.png" width="30" style="vertical-align:middle;"> Julekugle +2 point</li>
+            <li><img src="cookie.png" width="30" style="vertical-align:middle;"> Kagemand +10 point</li>
+            <li><img src="kul.png" width="30" style="vertical-align:middle;"> Kul -1 liv</li>
+            <li><img src="life.png" width="30" style="vertical-align:middle;"> Julehjerte +1 liv</li>
+            <li><img src="aebleskriver.png" width="30" style="vertical-align:middle;"> Æbleskive giver skjold</li>
+        </ul>
+        <p>Brug piletaster eller swipe på mobil for at bevæge Santa.</p>
+    `;
+
+    instructionsOverlay.classList.add('show');
+    instructionsOverlay.classList.remove('hide');
+});
+
     });
 
     btnBack.addEventListener('click', () => {
