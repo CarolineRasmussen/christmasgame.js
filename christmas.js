@@ -59,18 +59,21 @@ function preload() {
     queue.installPlugin(createjs.Sound);
 
     queue.loadManifest([
-        { id:"bg", src:"background.png" },
-        { id:"backgroundmusic", src:"audio/backgroundmusic.mp3" },
-        { id:"lifesound", src:"audio/getlife.mp3" },
-        { id:"pointssound", src:"audio/points.mp3" },
-        { id:"santahohoho", src:"audio/santahoho.mp3" },
-        { id:"levelup", src:"audio/levelup.mp3" },
-        { id:"gameoversound", src:"audio/gameover.mp3" },
-        { id:"speedup", src:"audio/speedup.mp3" },
-        { id:"looselifesound", src:"audio/looselife.mp3" },
-        { id:"santa", src:"santa.png" },
-        { id:"dyr", src:"dyr.png" }
-    ]);
+    { id:"bg", src:"background.png" },
+    { id:"backgroundmusic", src:"audio/backgroundmusic.mp3" },
+    { id:"lifesound", src:"audio/getlife.mp3" },
+    { id:"pointssound", src:"audio/points.mp3" },
+    { id:"santahohoho", src:"audio/santahoho.mp3" },
+    { id:"levelup", src:"audio/levelup.mp3" },
+    { id:"gameoversound", src:"audio/gameover.mp3" },
+    { id:"speedup", src:"audio/speedup.mp3" },
+    { id:"looselifesound", src:"audio/looselife.mp3" },
+    { id:"santa", src:"santa.png" },
+    { id:"dyr", src:"dyr.png" }
+]);
+
+queue.on('complete', init); // Sørg for at init kaldes, når alt er indlæst
+
 
     queue.on('progress', function(e) {
         preloadText.text = Math.round(e.progress*100) + "%";
@@ -87,8 +90,10 @@ function init() {
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth * 0.8;
     canvas.height = window.innerHeight * 0.8;
+    resizeCanvas(); 
 
     stage = new createjs.Stage(canvas);
+    
 
     // Hent baggrund fra queue
     bg = new createjs.Bitmap(queue.getResult("bg"));
@@ -151,9 +156,11 @@ function playGame() {
     cookies = [];
     aebleskriver = [];
     
+    // Ændret kode:
     stage.removeAllChildren();
     stage.addChild(bg, player, healthText, pointsText);
-    resizeBackground(); // sørg for at bg fylder canvas
+    resizeBackground(); // Sørg for at bg fylder canvas korrekt
+
 
     createjs.Sound.stop('backgroundmusic');
     createjs.Sound.play('backgroundmusic');
@@ -551,38 +558,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameOverOverlay = document.getElementById('gameOverOverlay');
     const finalScoreTxt = document.getElementById('finalScoreTxt');
 
-    btnStart.addEventListener('click', () => {
+    // Ændret kode:
+btnStart.addEventListener('click', () => {
     menuOverlay.classList.add('hide');
     menuOverlay.classList.remove('show');
     playGame();
+});
 
-    });
-
-    btnInstructions.addEventListener('click', () => {
+btnInstructions.addEventListener('click', () => {
     menuOverlay.classList.add('hide');
     menuOverlay.classList.remove('show');
     instructionsOverlay.classList.add('show');
     instructionsOverlay.classList.remove('hide');
 });
 
+btnBack.addEventListener('click', () => {
+    instructionsOverlay.classList.add('hide');
+    instructionsOverlay.classList.remove('show');
+    menuOverlay.classList.add('show');
+    menuOverlay.classList.remove('hide');
+});
 
-    });
+btnTryAgain.addEventListener('click', () => {
+    gameOverOverlay.classList.add('hide');
+    gameOverOverlay.classList.remove('show');
+    playGame();
+});
 
-    btnBack.addEventListener('click', () => {
-        instructionsOverlay.classList.add('hide');
-        instructionsOverlay.classList.remove('show');
-        menuOverlay.classList.add('show');
-        menuOverlay.classList.remove('hide');
-    });
+// Opdater score i game over overlay
+window.updateFinalScore = function(score) {
+    finalScoreTxt.textContent = `Your Score: ${score}`;
+};
 
-    btnTryAgain.addEventListener('click', () => {
-        gameOverOverlay.classList.add('hide');
-        gameOverOverlay.classList.remove('show');
-        playGame();
-    });
-
-    // Opdater score i game over overlay
-    window.updateFinalScore = function(score) {
-        finalScoreTxt.textContent = `Your Score: ${score}`;
-    };
 });
