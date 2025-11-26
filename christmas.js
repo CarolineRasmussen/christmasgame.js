@@ -148,6 +148,9 @@ function playGame() {
 
     gameIsOver = false;
 
+    healthText.text = "Health: " + health;
+    pointsText.text = "Points: " + points;
+
     presents = [];
     christmasBalls = [];
     sneFnugs = [];
