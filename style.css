@@ -69,13 +69,16 @@ canvas {
     color: #333;
 }
 
+#instructionsOverlay img,
 .instr-img {
     width: 100%;
-    max-width: 900px; /* eller 1200px hvis du vil have billedet endnu større */
     height: auto;
+    max-height: 90vh; /* Billedet må fylde næsten hele højde på mobilen */
+    object-fit: contain;
     display: block;
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
 }
+
 
 
 /* ================= BUTTONS ================= */
@@ -142,4 +145,5 @@ canvas {
         width: 150px;
     }
 }
+
 
