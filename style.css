@@ -69,18 +69,6 @@ canvas {
     color: #333;
 }
 
-#instructionsOverlay img,
-.instr-img {
-    width: 100%;
-    height: auto;
-    max-height: 90vh; /* Billedet må fylde næsten hele højde på mobilen */
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-}
-
-
-
 /* ================= BUTTONS ================= */
 .btn {
     display: inline-block;
@@ -145,5 +133,33 @@ canvas {
         width: 150px;
     }
 }
+
+/* --- FORCE: Instruktionsbillede fylder overlay på alle skærme --- */
+#instructionsOverlay,
+#instructionsOverlay .menu-box {
+    width: 95%;
+    max-width: 1200px;    /* maks på store skærme */
+    max-height: 95vh;     /* box må ikke overskride viewport-højde */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Billedet i overlay skal fylde boksen og være læsbart */
+#instructionsOverlay img,
+#instructionsOverlay .instr-img {
+    width: 100% !important;       /* fyld hele bredden af boksen */
+    height: auto !important;
+    max-height: 85vh !important;  /* fyld størstedelen af højden uden at gå ud over skærmen */
+    object-fit: contain !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Hvis du vil have at brugeren kan scrolle i boksen når billedet er meget højt */
+#instructionsOverlay .menu-box {
+    overflow-y: auto;
+}
+
 
 
