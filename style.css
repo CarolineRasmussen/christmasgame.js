@@ -70,9 +70,13 @@ canvas {
 }
 
 .instr-img {
-    width: 200px;
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px; /* eller 1200px hvis du vil have billedet endnu større */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
 }
+
 
 /* ================= BUTTONS ================= */
 .btn {
@@ -138,3 +142,4 @@ canvas {
         width: 150px;
     }
 }
+
