@@ -134,17 +134,6 @@ canvas {
     }
 }
 
-/* --- FORCE: Instruktionsbillede fylder overlay på alle skærme --- */
-#instructionsOverlay,
-#instructionsOverlay .menu-box {
-    width: 95%;
-    max-width: 1200px;    /* maks på store skærme */
-    max-height: 95vh;     /* box må ikke overskride viewport-højde */
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
 /* Billedet i overlay skal fylde boksen og være læsbart */
 #instructionsOverlay img,
 #instructionsOverlay .instr-img {
@@ -160,6 +149,7 @@ canvas {
 #instructionsOverlay .menu-box {
     overflow-y: auto;
 }
+
 
 
 
