@@ -400,12 +400,13 @@ function moveKul() {
 
 // ----------------- LOOSE HEALTH -----------------
 function looseHealth() {
+    if (player.safeTimeLeft > 0) return; // hvis spiller er midlertidigt immun
     createjs.Sound.play('looselifesound');
     health--;
     healthText.text = "Health: " + health;
     if (health <= 0) gameOver();
+    player.safeTimeLeft = Math.round(20 * scale); // kort immunitet efter hit
 }
-
 // ----------------- SPEED -----------------
 function checkForMoreSpeed() {
     if (points >= nextEkstraSpeed) {
